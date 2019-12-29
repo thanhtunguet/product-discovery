@@ -1,0 +1,116 @@
+@import "../../scss/variables";
+
+.products {
+  display: flex;
+  flex-direction: column;
+
+  .header {
+    .input-group {
+      border-radius: 5pt;
+      overflow: hidden;
+
+      .input-group-prepend {
+        background: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 8pt;
+        padding-right: 8pt;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      input.search {
+        display: block;
+        flex-grow: 1;
+        height: 32pt;
+        font-size: 14pt;
+        line-height: 19pt;
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .product-list {
+    background: rgb(238, 241, 243);
+    padding: 0 0;
+    flex-grow: 1;
+    overflow-y: scroll;
+
+    .product-list-item {
+      color: unset;
+
+      &:hover {
+        color: unset;
+        text-decoration: none;
+      }
+
+      li {
+        margin-top: 4pt;
+        background: #ffffff;
+        list-style: none;
+        display: flex;
+        padding: 12pt;
+
+        .product-picture {
+          display: block;
+          width: 80pt;
+          height: 80pt;
+          margin-right: 12pt;
+        }
+
+        .product-info {
+          flex-grow: 1;
+
+          .product-name {
+            display: block;
+            font-size: 14pt;
+          }
+
+          .product-discount {
+            @mixin price {
+              font-size: 12pt;
+              line-height: 16pt;
+            }
+
+            .product-discount-price {
+              text-decoration: line-through;
+              color: rgb(143, 149, 152);
+              @include price;
+            }
+
+            .product-discount-rate {
+              @include price;
+              background: $red-gradient;
+              color: #ffffff;
+              font-weight: bold;
+              height: 15pt;
+              line-height: 15pt;
+              font-size: 12.5pt;
+              margin-left: 8pt;
+              padding-right: 2pt;
+
+              &::before {
+                position: absolute;
+                width: 0;
+                height: 0;
+                top: 0;
+                right: 100%;
+                border-top: 7.5pt solid transparent;
+                border-right: 3.5pt solid red;
+                border-bottom: 7.5pt solid transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

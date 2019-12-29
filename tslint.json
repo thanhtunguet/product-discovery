@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "eofline": true,
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
+    "interface-name": false,
+    "no-shadowed-variable": false,
+    "object-literal-sort-keys": false,
+    "quotemark": [
+      true,
+      "jsx-double",
+      "single"
+    ],
+    "semicolon": [
+      true,
+      "always",
+      "ignore-bound-class-methods"
+    ],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ]
+  }
+}

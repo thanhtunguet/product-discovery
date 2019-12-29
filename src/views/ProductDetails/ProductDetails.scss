@@ -1,0 +1,83 @@
+@import "../../scss/variables";
+
+.product-detail {
+  .header {
+    background: #ffffff !important;
+    border-bottom: 1px solid $border-color;
+    justify-content: space-between;
+
+    .product-title {
+      display: block;
+      max-width: 156pt;
+      flex-grow: 1;
+      margin: auto;
+      text-align: center;
+      font-size: 13pt;
+      line-height: 18pt;
+
+      .name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+        color: rgb(38, 40, 41);
+      }
+
+      .price {
+        color: rgb(234, 52, 31);
+      }
+    }
+
+    button {
+      &.btn.btn-link.btn-cart {
+        margin-right: 8pt;
+      }
+    }
+  }
+
+  .product-selling-info {
+    border-top: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+  }
+}
+
+.carousel {
+  .carousel-item {
+    max-width: 100%;
+    max-height: 480px;
+    width: auto;
+    height: auto;
+
+    img {
+      display: block;
+      margin: auto;
+    }
+
+    @media(max-width: 480px) {
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    @media (min-width: 481px) {
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+
+  .carousel-indicators {
+    li {
+      width: 8pt;
+      height: 8pt;
+      border-radius: 100%;
+      background-color: $pale-gray;
+
+      &.active {
+        background-color: $reddish-orange !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "../../scss/variables";
+
+.view {
+  &.mobile-view {
+    &.products,
+    &.product-detail {
+      .header {
+        display: flex;
+        align-items: center;
+        background: $red-gradient;
+        padding: 8pt 8pt;
+
+        button {
+          &.btn.btn-link {
+            padding-left: 8pt;
+            padding-right: 8pt;
+
+            img {
+              width: 24px;
+              height: 24px;
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

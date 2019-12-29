@@ -1,0 +1,77 @@
+@import "variables";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/carousel";
+
+@import "~antd/lib/tabs/style/index.css";
+@import "tabs";
+
+@font-face {
+  font-family: SFMono-Regular;
+  src: url("/fonts/sf-ui-display-regular.otf") format("opentype");
+}
+
+.p-8 {
+  padding: 8pt 8pt;
+}
+
+.p-12 {
+  padding: 12pt 12pt;
+}
+
+body {
+  font-family: SFMono-Regular, sans-serif;
+}
+
+.product-price {
+  display: block;
+  color: $tomato;
+  font-size: 15pt;
+  line-height: 20pt;
+  margin-top: 4pt;
+  margin-bottom: 2pt;
+}
+
+ul.odds {
+  padding: 12pt 12pt;
+
+  li {
+    display: flex;
+    padding: 8pt 8pt;
+    color: $cool-gray;
+
+    &:first-of-type {
+      border-top-left-radius: 4pt;
+      border-top-right-radius: 4pt;
+    }
+
+    &:last-of-type {
+      border-bottom-left-radius: 4pt;
+      border-bottom-right-radius: 4pt;
+    }
+
+    &.odd {
+      background-color: $white;
+    }
+
+    &.even {
+      background: $pale-gray;
+    }
+
+    span {
+      font-size: 14pt;
+      line-height: 19pt;
+
+      &:first-child {
+        width: 50%;
+      }
+
+      &:last-child {
+        width: 50%;
+        text-align: right;
+        color: $dark-gray;
+      }
+    }
+  }
+}

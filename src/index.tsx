@@ -1,12 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import {GlobalState, initGlobalState} from 'config/global';
+import {routes} from 'config/routes';
+import {render} from 'react-dom';
+import {renderRoutes} from 'react-router-config';
+import {BrowserRouter} from 'react-router-dom';
+import React from 'reactn';
+import 'scss/main.scss';
+import {unregister} from 'serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
+(async () => {
+  await React.setGlobal<GlobalState>(initGlobalState);
+  render(
+    <BrowserRouter>
+      {renderRoutes(routes)}
+    </BrowserRouter>,
+    document.getElementById('root'),
+  );
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  if (process.env.NODE_ENV !== 'production') {
+    unregister();
+  }
+})();

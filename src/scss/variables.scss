@@ -1,0 +1,15 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/mixins/grid-framework";
+@import "~bootstrap/scss/variables";
+
+$columns: 12;
+$gutter: 0;
+
+$reddish-orange: #f5471e;
+$pale-gray: rgb(238, 241, 243);
+$cool-gray: #8f9598;
+$dark-gray: #262829;
+$tomato: #ea341f;
+
+$red-gradient: linear-gradient(to top, rgb(223, 32, 32), $reddish-orange);
