@@ -15,4 +15,3 @@ describe('ProductListItem', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 });
-

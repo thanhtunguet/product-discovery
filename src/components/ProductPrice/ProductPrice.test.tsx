@@ -15,4 +15,3 @@ describe('ProductPrice', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 });
-

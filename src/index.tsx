@@ -7,7 +7,7 @@ import {renderRoutes} from 'react-router-config';
 import {BrowserRouter, Redirect, Switch} from 'react-router-dom';
 import React from 'reactn';
 import 'scss/main.scss';
-import {unregister} from 'serviceWorker';
+import {register, unregister} from 'serviceWorker';
 
 (async () => {
   await React.setGlobal<GlobalState>(initGlobalState);
@@ -27,5 +27,7 @@ import {unregister} from 'serviceWorker';
 // Learn more about service workers: https://bit.ly/CRA-PWA
   if (process.env.NODE_ENV !== 'production') {
     unregister();
+  } else {
+    register();
   }
 })();

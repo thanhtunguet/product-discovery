@@ -15,4 +15,3 @@ describe('QuantityInput', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 });
-
