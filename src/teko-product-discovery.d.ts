@@ -783,8 +783,6 @@ declare module 'teko-product-discovery' {
     recommendMethod?: any;
   }
 
-
-
   export interface RootObject {
     code?: string;
 

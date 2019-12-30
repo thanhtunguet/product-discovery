@@ -130,9 +130,12 @@
     }
   }
 
-  .list-loading {
-    position: absolute;
-    bottom: -40px;
-    left: 50%;
+  .infinite-scroll-loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20pt;
+    padding-bottom: 20pt;
   }
 }

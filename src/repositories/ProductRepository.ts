@@ -2,7 +2,6 @@ import {AxiosResponse} from 'axios';
 import {httpConfig} from 'config/http';
 import {Product, ProductSearch} from 'models';
 import {Repository} from 'repositories/Repository';
-import {map} from 'rxjs/operators';
 import {RootObject} from 'teko-product-discovery';
 
 export class ProductRepository extends Repository {
@@ -15,21 +14,16 @@ export class ProductRepository extends Repository {
       .get('/api/search/', {
         params: productSearch,
       })
-      .pipe(
-        map((response: AxiosResponse<RootObject>) => {
-          return response.data;
-        }),
-      )
-      .toPromise();
-
+      .then((response: AxiosResponse<RootObject>) => {
+        return response.data;
+      });
   };
 
   public get = async (sku: string, productSearch: ProductSearch): Promise<Product> => {
     const {data: {result: {product}}} = await this.http
       .get(`/api/products/${sku}`, {
         params: productSearch,
-      })
-      .toPromise();
+      });
     return product;
   };
 }

@@ -1,4 +1,6 @@
-import {calcDiscountRate, formatNumber} from 'helpers/number';
+import ProductDiscount from 'components/ProductDiscount/ProductDiscount';
+import ProductPrice from 'components/ProductPrice/ProductPrice';
+import {calcDiscountRate} from 'helpers/number';
 import {getProductPath} from 'helpers/product';
 import {Product} from 'models';
 import React from 'react';
@@ -23,23 +25,8 @@ function ProductListItem(props: ProductListItemProps) {
             <span className="product-name">
               {product?.name}
             </span>
-          {product?.price?.supplierSalePrice && (
-            <span className="product-price">
-                    {formatNumber(product?.price?.supplierSalePrice)}
-              <sup>đ</sup>
-                  </span>
-          )}
-          {discountRate > 0 && (
-            <span className="product-discount">
-                <span className="product-discount-price">
-                  {formatNumber(product?.price?.supplierSalePrice)}
-                  <sup>đ</sup>
-                </span>
-                  <span className="product-discount-rate">
-                      {`-${discountRate}%`}
-                    </span>
-            </span>
-          )}
+          <ProductPrice product={product}/>
+          <ProductDiscount product={product} discountRate={discountRate}/>
         </div>
       </li>
     </a>

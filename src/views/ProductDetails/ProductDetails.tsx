@@ -2,6 +2,8 @@ import Button from 'antd/lib/button';
 import message from 'antd/lib/message';
 import Tabs from 'antd/lib/tabs';
 import classNames from 'classnames';
+import ProductDiscount from 'components/ProductDiscount/ProductDiscount';
+import ProductPrice from 'components/ProductPrice/ProductPrice';
 import QuantityInput from 'components/QuantityInput/QuantityInput';
 import {calcDiscountRate, formatNumber} from 'helpers/number';
 import {getProductPath} from 'helpers/product';
@@ -100,7 +102,7 @@ function ProductDetails() {
         </div>
         <button type="button" className="btn btn-link btn-cart">
           <img src="/images/cart.png" alt=""/>
-          {cartContents.length > 0 && (
+          {cartContents && cartContents.length > 0 && (
             <span className="quantity">
                 {cartContents.length}
               </span>
@@ -131,21 +133,8 @@ function ProductDetails() {
               {product.sku}
             </span>
           </div>
-          <div className="product-price">
-            {formatNumber(product.price?.supplierSalePrice)}
-            <sup>đ</sup>
-          </div>
-          {discountRate > 0 && (
-            <div className="product-discount">
-              <div className="product-discount-price">
-                {formatNumber(product.price?.sellPrice)}
-                <sup>đ</sup>
-              </div>
-              <div className="product-discount-rate">
-                {`-${discountRate}%`}
-              </div>
-            </div>
-          )}
+          <ProductPrice product={product}/>
+          <ProductDiscount product={product} discountRate={discountRate}/>
         </div>
 
         <div className="product-info-tabs">
@@ -197,23 +186,8 @@ function ProductDetails() {
                     <div className="name">
                       {product.name}
                     </div>
-                    {product.price?.supplierSalePrice && (
-                      <div className="product-price">
-                        {formatNumber(product.price?.supplierSalePrice)}
-                        <sup>đ</sup>
-                      </div>
-                    )}
-                    {discountRate > 0 && (
-                      <div className="product-discount">
-                        <div className="product-discount-price">
-                          {formatNumber(product.price?.sellPrice)}
-                          <sup>đ</sup>
-                        </div>
-                        <div className="product-discount-rate">
-                          {`-${discountRate}%`}
-                        </div>
-                      </div>
-                    )}
+                    <ProductPrice product={product}/>
+                    <ProductDiscount product={product} discountRate={discountRate}/>
                   </div>
                 </Link>
               );

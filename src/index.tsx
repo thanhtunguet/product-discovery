@@ -1,3 +1,4 @@
+import Spin from 'antd/lib/spin';
 import {GlobalState, initGlobalState} from 'config/global';
 import {HOME_ROUTE, PRODUCT_LISTING_ROUTE} from 'config/route-consts';
 import {routes} from 'config/routes';
@@ -12,10 +13,12 @@ import {unregister} from 'serviceWorker';
   await React.setGlobal<GlobalState>(initGlobalState);
   render(
     <BrowserRouter>
-      <Switch>
-        <Redirect exact from={HOME_ROUTE} to={PRODUCT_LISTING_ROUTE}/>
-        {renderRoutes(routes)}
-      </Switch>
+      <React.Suspense fallback={<Spin/>}>
+        <Switch>
+          <Redirect exact from={HOME_ROUTE} to={PRODUCT_LISTING_ROUTE}/>
+          {renderRoutes(routes)}
+        </Switch>
+      </React.Suspense>
     </BrowserRouter>,
     document.getElementById('root'),
   );

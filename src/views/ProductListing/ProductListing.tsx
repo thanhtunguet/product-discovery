@@ -73,7 +73,9 @@ function ProductListing() {
       <ul className="product-list">
         {listItems}
         {hasMore && (
-          <Spin/>
+          <div className="infinite-scroll-loading">
+            <Spin/>
+          </div>
         )}
       </ul>
     </div>

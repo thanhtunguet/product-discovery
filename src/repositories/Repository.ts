@@ -1,12 +1,11 @@
-import {AxiosRequestConfig} from 'axios';
-import Axios from 'axios-observable';
+import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {httpConfig} from 'config/http';
 
 export class Repository {
-  protected http: Axios;
+  protected http: AxiosInstance;
 
   constructor(config?: AxiosRequestConfig) {
-    this.http = Axios.create(httpConfig);
+    this.http = axios.create(httpConfig);
   }
 
   public setBaseURL(url: string) {
