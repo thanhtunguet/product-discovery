@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {MemoryRouter} from 'react-router-dom';
-import ProductListItem from './ProductListItem';
+import QuantityInput from './QuantityInput';
 
-describe('ProductListItem', () => {
+describe('QuantityInput', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
       <MemoryRouter>
-        <ProductListItem/>
+        <QuantityInput/>
       </MemoryRouter>,
       div,
     );

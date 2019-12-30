@@ -5,7 +5,7 @@ export function formatNumber(x: number | null | undefined): string {
   let r: string = x.toString();
   const pattern = /(-?\d+)(\d{3})/;
   while (pattern.test(r)) {
-    r = r.replace(pattern, '$1,$2');
+    r = r.replace(pattern, '$1.$2');
   }
   return r;
 }

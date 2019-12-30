@@ -1,10 +1,10 @@
 import {STORAGE_CART} from 'config/consts';
-import {Product} from 'models';
+import {CartContent} from 'models';
 
 export interface GlobalState {
-  products: Product[];
+  cartContents: CartContent[];
 }
 
 export const initGlobalState: GlobalState = {
-  products: JSON.parse(localStorage.getItem(STORAGE_CART) || '[]') || [],
+  cartContents: JSON.parse(localStorage.getItem(STORAGE_CART) || '[]') || [],
 };

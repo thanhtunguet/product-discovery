@@ -14,10 +14,10 @@ export class ProductSearch {
   public _order?: 'asc' | 'desc' = 'asc';
 
   // tslint:disable-next-line:variable-name
-  public _page?: number = 1;
+  public _page: number = 1;
 
   // tslint:disable-next-line:variable-name
-  public _limit?: number = 10;
+  public _limit: number = 10;
 
   public q?: string;
 }

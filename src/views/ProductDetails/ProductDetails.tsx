@@ -1,11 +1,19 @@
+import Button from 'antd/lib/button';
+import message from 'antd/lib/message';
 import Tabs from 'antd/lib/tabs';
 import classNames from 'classnames';
-import {PRODUCT_LISTING_ROUTE} from 'config/route-consts';
+import QuantityInput from 'components/QuantityInput/QuantityInput';
 import {calcDiscountRate, formatNumber} from 'helpers/number';
+import {getProductPath} from 'helpers/product';
+import {useAddingPrice} from 'hooks/useAddingPrice';
+import {useCart} from 'hooks/useCart';
 import {useProductDetail} from 'hooks/useProductDetail';
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import {useSlide} from 'hooks/useSlide';
+import {Product} from 'models';
+import {Link} from 'react-router-dom';
+import React from 'reactn';
 import Carousel from 'reactstrap/lib/Carousel';
+import CarouselControl from 'reactstrap/lib/CarouselControl';
 import CarouselIndicators from 'reactstrap/lib/CarouselIndicators';
 import CarouselItem from 'reactstrap/lib/CarouselItem';
 import {AttributeGroup, Image} from 'teko-product-discovery';
@@ -14,13 +22,11 @@ import './ProductDetails.scss';
 const {TabPane} = Tabs;
 
 function ProductDetails() {
-  const [product] = useProductDetail();
+  const [product, similarProducts, discountRate, handleGoBack] = useProductDetail();
 
-  const [activeIndex, setActiveIndex] = React.useState<number>(0);
+  const [quantity, setQuantity, addingPrice] = useAddingPrice(product);
 
-  const [animating, setAnimating] = React.useState<boolean>(false);
-
-  const history = useHistory();
+  const [cartContents, , addToCart] = useCart();
 
   const images: Image[] = React.useMemo(
     () => {
@@ -30,52 +36,36 @@ function ProductDetails() {
     [product],
   );
 
-  const handleGoBack = React.useCallback(
-    () => {
-      history.push(PRODUCT_LISTING_ROUTE);
-    },
-    [history],
-  );
+  const [
+    activeIndex,
+    ,
+    handleNext,
+    handlePrev,
+    handleGoToIndex,
+    handleExisting,
+    handleExisted,
+  ] = useSlide(images);
 
-  const handleNext = React.useCallback(
-    () => {
-      if (!animating) {
-        setActiveIndex((activeIndex + 1) % images.length);
+  const handleAddToCart = React.useCallback(
+    async () => {
+      if (quantity === 0) {
+        message.error('Bạn chưa chọn số lượng muốn mua');
+        return;
       }
+      await addToCart(product, quantity);
+      message.success('Thêm sản phẩm vào giỏ hàng thành công');
+      setQuantity(0);
     },
-    [animating, activeIndex, images.length],
+    [addToCart, product, quantity, setQuantity],
   );
 
-  const handlePrev = React.useCallback(
+  const [collapsed, setCollapsed] = React.useState<boolean>(true);
+
+  const handleToggleDetail = React.useCallback(
     () => {
-      if (!animating) {
-        setActiveIndex((activeIndex - 1 + images.length) % images.length);
-      }
+      setCollapsed(!collapsed);
     },
-    [animating, activeIndex, images.length],
-  );
-
-  const handleGoToIndex = React.useCallback(
-    (activeIndex: number) => {
-      if (!animating) {
-        setActiveIndex(activeIndex);
-      }
-    },
-    [animating],
-  );
-
-  const handleExisting = React.useCallback(
-    () => {
-      setAnimating(true);
-    },
-    [setAnimating],
-  );
-
-  const handleExisted = React.useCallback(
-    () => {
-      setAnimating(false);
-    },
-    [setAnimating],
+    [collapsed],
   );
 
   const slides = React.useMemo(
@@ -91,16 +81,6 @@ function ProductDetails() {
       ));
     },
     [handleExisted, handleExisting, images],
-  );
-
-  const discountRate: number = React.useMemo(
-    () => {
-      if (product?.price?.supplierSalePrice && product?.price.sellPrice) {
-        return calcDiscountRate(product?.price?.supplierSalePrice, product?.price.sellPrice);
-      }
-      return 0;
-    },
-    [product],
   );
 
   return (
@@ -120,6 +100,11 @@ function ProductDetails() {
         </div>
         <button type="button" className="btn btn-link btn-cart">
           <img src="/images/cart.png" alt=""/>
+          {cartContents.length > 0 && (
+            <span className="quantity">
+                {cartContents.length}
+              </span>
+          )}
         </button>
       </div>
       <div className="product-content">
@@ -129,15 +114,22 @@ function ProductDetails() {
                                 activeIndex={activeIndex}
                                 onClickHandler={handleGoToIndex}/>
             {slides}
+            <CarouselControl direction="prev" directionText="" onClickHandler={handlePrev}/>
+            <CarouselControl direction="next" directionText="" onClickHandler={handleNext}/>
           </Carousel>
         </div>
 
-        <div className="product-selling-info p-12">
+        <div className="product-selling-info">
           <div className="name">
             {product.name}
           </div>
           <div className="code">
-            Mã SP: {product.sku}
+            <span className="label">
+              Mã SP:
+            </span>
+            <span className="value">
+              {product.sku}
+            </span>
           </div>
           <div className="product-price">
             {formatNumber(product.price?.supplierSalePrice)}
@@ -149,7 +141,9 @@ function ProductDetails() {
                 {formatNumber(product.price?.sellPrice)}
                 <sup>đ</sup>
               </div>
-              {discountRate}
+              <div className="product-discount-rate">
+                {`-${discountRate}%`}
+              </div>
             </div>
           )}
         </div>
@@ -159,7 +153,9 @@ function ProductDetails() {
             <TabPane key="1" tab="Mô tả sản phẩm" disabled={true}>
             </TabPane>
             <TabPane key="2" tab="Thông số kỹ thuật">
-              <ul className="odds">
+              <ul className={classNames('odds', {
+                collapsed,
+              })}>
                 {product.attributeGroups?.map((attributeGroup: AttributeGroup, index: number) => (
                   <li className={classNames((index % 2 === 1) ? 'odd' : 'even')} key={`${attributeGroup.id}-${index}`}>
                     <span className="name">
@@ -170,12 +166,73 @@ function ProductDetails() {
                     </span>
                   </li>
                 ))}
+                <li className="overlay">
+                  <Button type="link" htmlType="button" onClick={handleToggleDetail}>
+                    {collapsed ? 'Hiển thị nhiều hơn' : 'Thu gọn'}
+                  </Button>
+                </li>
               </ul>
             </TabPane>
             <TabPane key="3" tab="So sánh giá" disabled={true}>
             </TabPane>
           </Tabs>
         </div>
+
+        {similarProducts.length > 0 && (
+          <div className="similar-products">
+            {similarProducts.map((product: Product) => {
+              const {images = []} = product;
+              const discountRate: number =
+                (product.price?.supplierSalePrice && product.price.sellPrice)
+                  ? calcDiscountRate(product.price.supplierSalePrice, product.price.sellPrice)
+                  : 0;
+              return (
+                <Link key={product.sku} to={getProductPath(product)} className="product">
+                  <div className="product-picture">
+                    {images.length > 0 && (
+                      <img src={images[0].url} alt=""/>
+                    )}
+                  </div>
+                  <div className="product-info">
+                    <div className="name">
+                      {product.name}
+                    </div>
+                    {product.price?.supplierSalePrice && (
+                      <div className="product-price">
+                        {formatNumber(product.price?.supplierSalePrice)}
+                        <sup>đ</sup>
+                      </div>
+                    )}
+                    {discountRate > 0 && (
+                      <div className="product-discount">
+                        <div className="product-discount-price">
+                          {formatNumber(product.price?.sellPrice)}
+                          <sup>đ</sup>
+                        </div>
+                        <div className="product-discount-rate">
+                          {`-${discountRate}%`}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
+        {product.price?.supplierSalePrice ? (
+          <div className="product-buying">
+            <QuantityInput onChange={setQuantity} value={quantity}/>
+            <Button htmlType="button" type="primary" className="add-to-cart" onClick={handleAddToCart}>
+              <img src="/images/add-to-cart.png" alt=""/>
+              <span className="adding-price">
+              {formatNumber(addingPrice)}
+                <sup>đ</sup>
+            </span>
+            </Button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

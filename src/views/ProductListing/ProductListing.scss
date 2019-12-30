@@ -3,6 +3,7 @@
 .products {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 
   .header {
     .input-group {
@@ -41,8 +42,8 @@
   .product-list {
     background: rgb(238, 241, 243);
     padding: 0 0;
-    flex-grow: 1;
-    overflow-y: scroll;
+    display: block;
+    width: 100%;
 
     .product-list-item {
       color: unset;
@@ -53,21 +54,36 @@
       }
 
       li {
-        margin-top: 4pt;
         background: #ffffff;
         list-style: none;
         display: flex;
-        padding: 12pt;
+        justify-content: space-between;
+        padding: 12pt 0;
+        margin: 4pt 0 0 0;
+        width: 100%;
 
         .product-picture {
-          display: block;
+          display: inline-flex;
           width: 80pt;
           height: 80pt;
-          margin-right: 12pt;
+          overflow: hidden;
+          margin-left: 12pt;
+
+          img {
+            box-sizing: content-box;
+            width: 80pt;
+            height: 80pt;
+            max-height: 100%;
+          }
         }
 
         .product-info {
           flex-grow: 1;
+          flex-basis: calc(100% - 116pt);
+          padding: 0 12pt;
+          display: flex;
+          align-items: flex-start;
+          flex-direction: column;
 
           .product-name {
             display: block;
@@ -112,5 +128,11 @@
         }
       }
     }
+  }
+
+  .list-loading {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
   }
 }

@@ -1,8 +1,9 @@
 import {GlobalState, initGlobalState} from 'config/global';
+import {HOME_ROUTE, PRODUCT_LISTING_ROUTE} from 'config/route-consts';
 import {routes} from 'config/routes';
 import {render} from 'react-dom';
 import {renderRoutes} from 'react-router-config';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Redirect, Switch} from 'react-router-dom';
 import React from 'reactn';
 import 'scss/main.scss';
 import {unregister} from 'serviceWorker';
@@ -11,7 +12,10 @@ import {unregister} from 'serviceWorker';
   await React.setGlobal<GlobalState>(initGlobalState);
   render(
     <BrowserRouter>
-      {renderRoutes(routes)}
+      <Switch>
+        <Redirect exact from={HOME_ROUTE} to={PRODUCT_LISTING_ROUTE}/>
+        {renderRoutes(routes)}
+      </Switch>
     </BrowserRouter>,
     document.getElementById('root'),
   );

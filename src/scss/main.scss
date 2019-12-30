@@ -1,10 +1,22 @@
 @import "variables";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/input-group";
-@import "~bootstrap/scss/carousel";
 
+@import "~bootstrap/scss/reboot";
+
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/input-group";
+
+@import "~antd/lib/avatar/style/index.css";
+@import "~antd/lib/button/style/index.css";
+@import "~antd/lib/icon/style/index.css";
+@import "~antd/lib/input/style/index.css";
+@import "~antd/lib/list/style/index.css";
+@import "~antd/lib/message/style/index.css";
+@import "~antd/lib/spin/style/index.css";
 @import "~antd/lib/tabs/style/index.css";
+
+@import "~react-virtualized/styles.css";
+
 @import "tabs";
 
 @font-face {
@@ -12,43 +24,113 @@
   src: url("/fonts/sf-ui-display-regular.otf") format("opentype");
 }
 
-.p-8 {
-  padding: 8pt 8pt;
-}
-
-.p-12 {
-  padding: 12pt 12pt;
-}
-
 body {
   font-family: SFMono-Regular, sans-serif;
 }
 
 .product-price {
-  display: block;
   color: $tomato;
   font-size: 15pt;
   line-height: 20pt;
   margin-top: 4pt;
   margin-bottom: 2pt;
+  display: inline-table;
+}
+
+.product-discount {
+  display: inline-table;
+  margin-left: 4pt;
+
+  .product-discount-price {
+    text-decoration: line-through;
+    font-size: 12pt;
+    line-height: 16pt;
+    letter-spacing: -0.1pt;
+    color: $cool-gray;
+    display: inline-table;
+  }
+
+  .product-discount-rate {
+    background-color: $reddish-orange;
+    color: $white;
+    font-size: 10pt;
+    line-height: 12.5pt;
+    letter-spacing: -0.24pt;
+    padding: 0.5pt 2pt 2pt;
+    display: inline-table;
+    overflow: visible;
+    border-radius: 2pt;
+    margin-left: 7.5pt;
+    box-sizing: border-box;
+    position: relative;
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      top: 0;
+      left: -3.5pt;
+      border-style: solid;
+      border-width: 7pt 3.5pt 7pt 0;
+      border-color: transparent $reddish-orange transparent transparent;
+    }
+  }
 }
 
 ul.odds {
   padding: 12pt 12pt;
+  height: auto;
+  max-height: unset;
+  overflow: unset;
+  position: relative;
+
+  &.collapsed {
+    max-height: 196pt;
+    overflow: hidden;
+
+    li.overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, $white, rgba(0, 0, 0, 0));
+    }
+  }
 
   li {
     display: flex;
     padding: 8pt 8pt;
     color: $cool-gray;
 
+    &.overlay {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      z-index: 100;
+
+      button {
+        &.ant-btn.ant-btn-link {
+          width: 100%;
+          padding: 0 0;
+          text-align: center;
+
+          span {
+            color: $deep-sky-blue;
+            text-align: center;
+          }
+        }
+      }
+    }
+
     &:first-of-type {
-      border-top-left-radius: 4pt;
-      border-top-right-radius: 4pt;
+      border-radius: 4pt 4pt 0 0;
     }
 
     &:last-of-type {
-      border-bottom-left-radius: 4pt;
-      border-bottom-right-radius: 4pt;
+      border-radius: 0 0 4pt 4pt;
     }
 
     &.odd {

@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+
+.quantity-input {
+  display: inline-flex;
+  padding: 8pt 8pt;
+
+  .ant-btn {
+    &.plus, &.minus {
+      border-radius: 100%;
+      width: 24pt;
+      height: 24pt;
+      background-color: $silver;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 0;
+      margin: 12pt 8pt;
+    }
+  }
+
+  .ant-input {
+    width: 40pt;
+    border: none;
+    text-align: center;
+    font-size: 15pt;
+    line-height: 20pt;
+    margin: 12pt 0;
+    font-family: SFMono-Regular, sans-serif;
+
+    &:focus, &:active, &:hover {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
