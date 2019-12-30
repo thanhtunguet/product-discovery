@@ -11,13 +11,14 @@ Teko Product Discovery
     - `slugify`: for generating product SEO URL
 
 2. Project architecture
-    I divided my project into 3 layers:
+
+    3-layers pattern:
     - Repositories: Data access layer
     - Hooks (aka Services): Business logic layer
     - Views: Presentation layer
 
 3. Mobile-friendly approach
-    - To keep it simple, I created individual layout for mobile devices
+    - To keep it simple, create individual layout for mobile devices
     - Mobile layout has its own set of views
     - Infinite scrolling
 
