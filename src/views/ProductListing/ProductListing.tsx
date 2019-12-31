@@ -17,16 +17,6 @@ function ProductListing() {
     handleLoadMore,
   ] = useProductList();
 
-  React.useEffect(
-    () => {
-      window.addEventListener('scroll', handleLoadMore);
-      return () => {
-        window.removeEventListener('scroll', handleLoadMore);
-      };
-    },
-    [handleLoadMore],
-  );
-
   const listItems = React.useMemo(
     () => list.map((product: Product) => (
       <ProductListItem product={product} key={product.sku}/>
@@ -36,13 +26,19 @@ function ProductListing() {
 
   const handleSearch = React.useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setSearch({
-        ...search,
-        q: event.target.value,
-        _page: 1,
-      });
+      setSearch(event.target.value);
     },
-    [setSearch, search],
+    [setSearch],
+  );
+
+  React.useEffect(
+    () => {
+      window.addEventListener('scroll', handleLoadMore);
+      return () => {
+        window.removeEventListener('scroll', handleLoadMore);
+      };
+    },
+    [handleLoadMore],
   );
 
   const handleGoBack = React.useCallback(
