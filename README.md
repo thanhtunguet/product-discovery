@@ -33,3 +33,7 @@ Teko Product Discovery
 
 6. Deployment
     - Using github pages and Travis CI
+
+
+### Demo
+[https://product-discovery.thanhtunguet.info](https://product-discovery.thanhtunguet.info)
