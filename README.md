@@ -18,7 +18,7 @@ Teko Product Discovery
     - Views: Presentation layer
 
 3. Mobile-friendly approach
-    - To keep it simple, create individual layout for mobile devices
+    - To keep it simple, create particular layout for mobile devices
     - Mobile layout has its own set of views
     - Infinite scrolling
 
