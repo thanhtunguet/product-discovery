@@ -1481,6 +1481,11 @@
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
 
+"@types/ts-nameof@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@types/ts-nameof/-/ts-nameof-4.2.0.tgz#e0798d5280e0f09d71dcf2e7003fe2c990f8d756"
+  integrity sha512-lpJs/6ZQepBjB4ui9GZhGjeJ+fnpf8GZZEBowcId8fAjUTJOAZ+3TWQbISGaEbNenX8wIG2pUWKxjUh2L2OvsQ==
+
 "@types/yargs-parser@*":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-13.1.0.tgz#c563aa192f39350a1d18da36c5a8da382bbd8228"
@@ -2983,11 +2988,6 @@ commander@^2.11.0, commander@^2.12.1, commander@^2.20.0, commander@~2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
-
-commander@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.0.tgz#545983a0603fe425bc672d66c9e3c89c42121a83"
-  integrity sha512-NIQrwvv9V39FHgGFm36+U9SMQzbiHvU79k+iADraJTpmrFFfx7Ds0IvDoAdZsDrknlkRk14OYoWXb57uTh7/sw==
 
 commander@~2.19.0:
   version "2.19.0"
@@ -5075,17 +5075,6 @@ handlebars@^4.1.2:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.5.3.tgz#5cf75bd8714f7605713511a56be7c349becb0482"
   integrity sha512-3yPecJoJHK/4c6aZhSvxOyG4vJKDshV36VHp0iVCDVh7o9w2vwi3NSnL2MMPj3YdduqaBcu7cGbggJQM0br9xA==
-  dependencies:
-    neo-async "^2.6.0"
-    optimist "^0.6.1"
-    source-map "^0.6.1"
-  optionalDependencies:
-    uglify-js "^3.1.4"
-
-handlebars@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.6.0.tgz#33af6c3eda930d7a924f5d8f1c6d8edc3180512e"
-  integrity sha512-i1ZUP7Qp2JdkMaFon2a+b0m5geE8Z4ZTLaGkgrObkEd+OkUKyRbRWw4KxuFCoHfdETSY1yf9/574eVoNSiK7pw==
   dependencies:
     neo-async "^2.6.0"
     optimist "^0.6.1"
@@ -9743,18 +9732,15 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react3l-cli@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react3l-cli/-/react3l-cli-0.4.0.tgz#78391527e3118072fb024dcde42f41031b389890"
-  integrity sha512-uaX5j1DznFLcDd+tdbYkgG/JIssjgJMgqYyC7mEwRJj6QXFZuagBV+z5nt8wB/VDfjK2Yy01oMPX9qUQbmp6Xw==
+react3l-cli@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react3l-cli/-/react3l-cli-0.1.2.tgz#8cf7237bfe16c3e6da203c8882a1fb5621dfd124"
+  integrity sha512-BjnmYWdbuJ+5IUpsFpKbl6LB02F4A0XTwtnkMKRYo19PUIBNO80BnNigDCkDMrU3btl+VZlQhpNe8D0GvlJEIw==
   dependencies:
-    commander "^4.1.0"
-    handlebars "^4.6.0"
-    lodash "^4.17.15"
-    react "^16.11.0"
+    react "^16.10.2"
     react-dom "^16.10.2"
 
-react@^16.11.0, react@^16.12.0:
+react@^16.10.2, react@^16.12.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
