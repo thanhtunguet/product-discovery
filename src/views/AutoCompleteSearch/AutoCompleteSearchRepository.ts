@@ -4,7 +4,7 @@ import { Repository } from 'repositories/Repository';
 export class AutoCompleteSearchRepository extends Repository {
     constructor() {
         super();
-        this.setBaseURL(process.env.NODE_ENV === 'development' ? window.location.origin : 'http://123.31.32.172:5001');
+        this.setBaseURL(window.location.origin);
     }
 
     public search(query: string): Promise<any> {
