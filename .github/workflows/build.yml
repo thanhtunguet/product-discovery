@@ -1,0 +1,82 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main, develop ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install system dependencies for node-sass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y python make g++
+    
+    - name: Install dependencies
+      run: npm ci
+      env:
+        npm_config_build_from_source: true
+    
+    - name: Run linter
+      run: npm run lint --if-present
+      continue-on-error: true
+    
+    - name: Build
+      run: npm run build
+    
+    - name: Run tests
+      run: npm test -- --coverage --passWithNoTests --watchAll=false
+      continue-on-error: true
+    
+    - name: Upload build artifact
+      if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+      uses: actions/upload-artifact@v3
+      with:
+        name: build
+        path: build/
+        retention-days: 1
+
+  deploy:
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    needs: build
+    runs-on: ubuntu-20.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: build
+        path: build/
+    
+    - name: Upload to GitHub Pages
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: build/
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
