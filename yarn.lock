@@ -1481,11 +1481,6 @@
     "@types/react-dom" "*"
     "@types/testing-library__dom" "*"
 
-"@types/ts-nameof@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@types/ts-nameof/-/ts-nameof-4.2.0.tgz#e0798d5280e0f09d71dcf2e7003fe2c990f8d756"
-  integrity sha512-lpJs/6ZQepBjB4ui9GZhGjeJ+fnpf8GZZEBowcId8fAjUTJOAZ+3TWQbISGaEbNenX8wIG2pUWKxjUh2L2OvsQ==
-
 "@types/yargs-parser@*":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-13.1.0.tgz#c563aa192f39350a1d18da36c5a8da382bbd8228"
@@ -6405,9 +6400,9 @@ js-tokens@^3.0.2:
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
 js-yaml@^3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
-  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  version "3.14.2"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.14.2.tgz#77485ce1dd7f33c061fd1b16ecea23b55fcb04b0"
+  integrity sha512-PMSmkqxr106Xa156c2M265Z+FTrPl+oxd/rgOQy2tijQeK5TxQ43psO1ZCwhVOSdnn+RzkzlRz/eY4BgJBYVpg==
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
